@@ -1,4 +1,0 @@
-UrbanAirship
-============
-
-Urban Airship
