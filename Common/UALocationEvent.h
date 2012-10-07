@@ -29,24 +29,25 @@
 
 /** Keys and values for location analytics */
 typedef NSString UALocationEventAnalyticsKey;
-extern UALocationEventAnalyticsKey * const locationEventForegroundKey; 
-extern UALocationEventAnalyticsKey * const locationEventForegroundKey; 
-extern UALocationEventAnalyticsKey * const locationEventLatitudeKey;
-extern UALocationEventAnalyticsKey * const locationEventLongitudeKey;
-extern UALocationEventAnalyticsKey * const locationEventDesiredAccuracyKey;
-extern UALocationEventAnalyticsKey * const locationEventUpdateTypeKey;
-extern UALocationEventAnalyticsKey * const locationEventProviderKey;
-extern UALocationEventAnalyticsKey * const locationEventDistanceFilterKey;
-extern UALocationEventAnalyticsKey * const locationEventHorizontalAccuracyKey;
-extern UALocationEventAnalyticsKey * const locationEventVerticalAccuracyKey;
+extern UALocationEventAnalyticsKey * const UALocationEventForegroundKey; 
+extern UALocationEventAnalyticsKey * const UALocationEventForegroundKey; 
+extern UALocationEventAnalyticsKey * const UALocationEventLatitudeKey;
+extern UALocationEventAnalyticsKey * const UALocationEventLongitudeKey;
+extern UALocationEventAnalyticsKey * const UALocationEventDesiredAccuracyKey;
+extern UALocationEventAnalyticsKey * const UALocationEventUpdateTypeKey;
+extern UALocationEventAnalyticsKey * const UALocationEventProviderKey;
+extern UALocationEventAnalyticsKey * const UALocationEventDistanceFilterKey;
+extern UALocationEventAnalyticsKey * const UALocationEventHorizontalAccuracyKey;
+extern UALocationEventAnalyticsKey * const UALocationEventVerticalAccuracyKey;
 
 typedef NSString UALocationEventUpdateType;
-extern UALocationEventUpdateType * const locationEventAnalyticsType;
-extern UALocationEventUpdateType * const locationEventUpdateTypeChange;
-extern UALocationEventUpdateType * const locationEventUpdateTypeContinuous;
-extern UALocationEventUpdateType * const locationEventUpdateTypeSingle;
-extern UALocationEventUpdateType * const locationEventUpdateTypeNone;
+extern UALocationEventUpdateType * const UALocationEventAnalyticsType;
+extern UALocationEventUpdateType * const UALocationEventUpdateTypeChange;
+extern UALocationEventUpdateType * const UALocationEventUpdateTypeContinuous;
+extern UALocationEventUpdateType * const UALocationEventUpdateTypeSingle;
+extern UALocationEventUpdateType * const UALocationEventUpdateTypeNone;
 
+extern NSString * const UAAnalyticsValueNone;
 
 /** A UALocationEvent captures all the necessary information for 
  UAAnalytics
@@ -99,23 +100,43 @@ extern UALocationEventUpdateType * const locationEventUpdateTypeNone;
 /// @name Support Methods
 ///---------------------------------------------------------------------------------------
 
-/** Creates a dictionary with the appropriate data gather from the location and locationManager
+/** Creates a dictionary with the appropriate data gathered from the CLLocation
+ @param dictionary The dictionary to populate with values
+ @param location Location to parse values from
  */
 - (void)populateDictionary:(NSMutableDictionary*)dictionary withLocationValues:(CLLocation*)location;
+
+/** Creates a dictionary with the appropriate data gathered from the CLLocationManager
+ @param dictionary The dictionary to populate with values
+ @param locationManager The location manager to parse values from
+ */
 - (void)populateDictionary:(NSMutableDictionary*)dictionary withLocationManagerValues:(CLLocationManager*)locationManager;
+
+/** Creates a dictionary with the appropriate data gathered from the object conforming to the UALocationProviderProtocol
+ @param locationProvider The object implementing the UALocationProviderProtocol to parse data from
+ */
 - (void)populateDictionary:(NSMutableDictionary*)dictionary withLocationProviderValues:(id<UALocationProviderProtocol>)locationProvider;
 
-
+/** Populates a dictionary with the defaulf values for reporting a significant change event. The values currently default
+ to NONE, and are defined in the implementation file
+ @param dictionary The dictionary to populate with values
+*/
+- (void)setDefaultSignificantChangeDistanceAndAccuracyValuesInContext:(NSMutableDictionary*)context;
 
 /** Converts a double to a string keeping seven digit of precision 
  Seven digits produces sub meter accuracy at the equator.
  http://en.wikipedia.org/wiki/Decimal_degrees
  @param doubleValue The double to convert.
- @return Returns an NSString representing the 7 digit value
+ @return NSString representing the 7 digit value
  */
 - (NSString*)stringFromDoubleToSevenDigits:(double)doubleValue;
 
-
+/** Converts a double to a string and truncating it
+ to an int.
+ @param doubleValue The double to convert and truncate
+ @return NSString representing the double as an int
+ */
+- (NSString*)stringAsIntFromDouble:(double)doubleValue;
 
 
 @end

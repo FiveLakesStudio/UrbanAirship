@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2011 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2012 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -231,14 +231,14 @@ UIKIT_EXTERN NSString* const UIApplicationDidBecomeActiveNotification __attribut
 #pragma mark UITableViewDataSource
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
+    
     UAStoreFrontCell *cell = (UAStoreFrontCell *)[tableView dequeueReusableCellWithIdentifier:@"store-front-cell"];
     if (cell == nil) {
         cell = [[[UAStoreFrontCell alloc] initWithStyle:UITableViewCellStyleDefault
                                         reuseIdentifier:@"store-front-cell"] autorelease];
         [UAViewUtils roundView:cell.iconContainer borderRadius:10 borderWidth:1 color:[UIColor darkGrayColor]];
     }
-
+    
     NSArray *tableProducts = [self productsForTableView:tableView];
     if (indexPath.row < [tableProducts count]) {
         cell.product = [tableProducts objectAtIndex:indexPath.row];

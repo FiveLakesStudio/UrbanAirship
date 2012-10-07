@@ -1,5 +1,5 @@
 /*
- Copyright 2009-2011 Urban Airship Inc. All rights reserved.
+ Copyright 2009-2012 Urban Airship Inc. All rights reserved.
 
  Redistribution and use in source and binary forms, with or without
  modification, are permitted provided that the following conditions are met:
@@ -99,7 +99,7 @@ static BOOL runiPhoneTargetOniPad = NO;
     } else {
         // else iPad
         if (ui.uaWindow == nil) {
-            ui.uaWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+            ui.uaWindow = [[[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds] autorelease];
             [ui.uaWindow addSubview:ui.rootViewController.view];
         }
 
